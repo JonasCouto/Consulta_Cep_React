@@ -1,19 +1,36 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Errorr from './componentes/Errorr';
+import Loading from './componentes/Loading';
+import Result from './componentes/Result';
+import Search from './componentes/Search';
+
+
 
 
 function App() {
+
+  var [nomeTela, setNomeTela] = useState('Search');
+
+  function goTo(nomeTela){
+        console.log('o Nome da tela é ' + nomeTela);
+        setNomeTela(nomeTela);
+  }
   
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Qual CEP você deseja pesquisar?</p>
-        <input/>
-        <button> Consultar </button>
-      </header>
-    </div>
-  )
+
+  return(<div>
+
+        <div className="App">
+          <header className="App-header">
+            {nomeTela == 'Search' ? <Search navegar={goTo} /> : null}
+            {nomeTela == 'Result' ? <Result navegar={goTo} result={{"Rua" : "Bento Gonçalves"}}/> : null}
+            {nomeTela == 'Error' ? <Errorr navegar={goTo} textoTopo=" Não foi possivel localizar CEP"/> : null}
+            {nomeTela == 'Loading' ? <Loading navegar={goTo} /> : null}
+          </header>  
+        </div>
+      </div>
+  );
   
 }
 
