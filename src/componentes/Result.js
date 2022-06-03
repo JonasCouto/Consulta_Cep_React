@@ -1,5 +1,6 @@
 function Result(props){
   var navegar = props.navegar;
+  var resultado = props.result;
 
   // guardar o resultado do objeto props
   const results = props.result;
@@ -8,10 +9,12 @@ function Result(props){
   const element = keys.map(key => (
     <span key={key}><b>{key}: </b>{results[key]}</span>
   ))
+
+  // console.log(resultado);
     return (
           <>
             {/* <img src={logo} className="App-logo" alt="logo" /> */}
-            <p>Resultado para o CEP 91520-110</p>
+            <p>Resultado para o CEP {resultado.cep}</p>
             {element}
             <button onClick={()=> navegar('Search')}> Nova Consulta </button>
           </>
