@@ -12,6 +12,8 @@ import Search from './componentes/Search';
 function App() {
 // teste
   var [nomeTela, setNomeTela] = useState('Search');
+  var [resultado, setResultado] = useState({});
+  
 
   function goTo(nomeTela){
         console.log('o Nome da tela é ' + nomeTela);
@@ -23,9 +25,9 @@ function App() {
 
         <div className="App">
           <header className="App-header">
-            {nomeTela == 'Search' ? <Search navegar={goTo} /> : null}
-            {nomeTela == 'Result' ? <Result navegar={goTo} result={{"Rua" : "Bento Gonçalves"}}/> : null}
-            {nomeTela == 'Error' ? <Errorr navegar={goTo} textoTopo=" Não foi possivel localizar CEP"/> : null}
+            {nomeTela == 'Search' ? <Search navegar={goTo} setResultado={setResultado}/> : null}
+            {nomeTela == 'Result' ? <Result navegar={goTo} result={resultado}/> : null}
+            {nomeTela == 'Error' ? <Errorr navegar={goTo}  /> : null}
             {nomeTela == 'Loading' ? <Loading navegar={goTo} /> : null}
           </header>  
         </div>

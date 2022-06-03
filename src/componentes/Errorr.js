@@ -3,7 +3,7 @@ function Errorr(props) {
     return (
           <>  
             <p>Erro na consulta</p>
-            <p>{props.textoTopo}</p>
+            <p>{props.errorMessage}</p>
             <button onClick={()=> navegar('Search')}> Nova Consulta </button>
           </>
     )
