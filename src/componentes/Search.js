@@ -5,7 +5,7 @@ import consultarCep from 'cep-promise';
 function Search(props){
   var navegar = props.navegar;
   var setResultado = props.setResultado;
-  var setErrorMessage = props.errorMessage;
+  var setErroMsg = props.setErroMsg;
 
   var [cepNumber,  setCepNumber] = useState('');
    
@@ -18,13 +18,16 @@ function Search(props){
   }
 
   function handleSearch(){
+    navegar("Loading")
+    // API de CEP 
     consultarCep(cepNumber)
       .then(handleSuccess)
       .catch(handleError)
+     
   }
 
   function handleSuccess(dadosCep){
-    // alterar os nomes do objeto
+    // alterar os nomes do objeto 
     var objeto = {
       'ESTADO': dadosCep.state,
       'CIDADE': dadosCep.city,
@@ -33,19 +36,18 @@ function Search(props){
     }
     setResultado(objeto);
     navegar('Result')
-        
   }
 
   function handleError(error){
-    var errorMessage = error.message
-    setErrorMessage(errorMessage);
-    navegar('Error')  
+    var erroMsg = error.message;
+    console.log(erroMsg);
+    setErroMsg(erroMsg);
+    navegar("Error");
   }
-
     return (
       <>
           <p>Qual CEP você deseja pesquisar?</p>
-          <p>Teste de valor input: {cepNumber}</p>
+          <p>{cepNumber}</p>
           <input value={cepNumber} onChange={handleChange}/>
           <button onClick={clear}> Limpar</button>
           <button onClick={handleSearch} > Consultar </button>
